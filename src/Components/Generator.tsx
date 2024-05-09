@@ -1,4 +1,5 @@
-import resetIcon from '../Icons/restart-svgrepo-com.svg'
+import resetIcon from '../Icons/restart-svgrepo-com.svg';
+import clipBoardIcon from '../Icons/clipboard-copy-duplicate-paste-svgrepo-com.svg';
 import { useCallback, useState } from 'react';
 
 
@@ -24,8 +25,9 @@ const Generator = () => {
         specialchars: '!@#$%^&*()_+=-'
     }
 
-    const [settings, setSettings] = useState<settingsDict>({uppercase: true, lowercase: true, specialchars: true, numbers: true, length: 10});
-    const [sliderLen, setsliderLen] = useState(0);
+    const [settings, setSettings] = useState<settingsDict>({uppercase: true, lowercase: true, specialchars: true, numbers: true, length: 4});
+    const [sliderLen, setsliderLen] = useState(4);
+    const [generating, switchGenerating] = useState(false);
 
     const checkboxHandler = (event: any) => {
         const checkbox = {name: event.target.name, value: event.target.checked};
@@ -63,6 +65,8 @@ const Generator = () => {
     }
 
     const generate = async () => {
+        if(generating) return;
+        switchGenerating(true);
         const filteredKeys: (keyof Symbols)[] = Object.keys(symbols).filter(key => settings[key])
 
         const usable_symbols:Partial<Symbols> = filteredKeys.reduce((acc, key) => {
@@ -70,7 +74,10 @@ const Generator = () => {
             return acc;
         }, {} as Partial<Symbols>);
 
-        if(Object.keys(usable_symbols).length === 0) return;
+        if(Object.keys(usable_symbols).length === 0) {
+            switchGenerating(false); 
+            return;
+        }
 
         let pass:string = ''
 
@@ -79,6 +86,7 @@ const Generator = () => {
             pass += getRandomChar(usable_symbols);
             setPassword(pass);
         }
+        switchGenerating(false);
     }
 
 
@@ -101,12 +109,18 @@ const Generator = () => {
         }
     }
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(password);
+        alert('Copied to clipboard!');
+    }
+
     return (
         <div id="generator">
             <div id="top">
                 <div id="input">
                     <input type="text" id="password" placeholder='Password' value={password}/>
-                    <img src={resetIcon} onClick={() => setPassword('')}/>
+                    <img src={resetIcon} className="icon reset" alt="Reset" onClick={() => setPassword('')}/>
+                    <img src={clipBoardIcon} className='icon copy' alt="Copy to clipboard" onClick={() => copyToClipboard()}/>
                 </div>
             </div>
             <div id="bottom">
@@ -127,7 +141,7 @@ const Generator = () => {
                     <div id="title">Numbers</div>
                 </div> 
                 <div className="slider">
-                    <input type="range" name='length' onChange={sliderHandler} min={1} max={25}/>
+                    <input type="range" name='length' onChange={sliderHandler} min={1} max={20} defaultValue={4}/>
                     <div id="title">Length {sliderLen}</div>
                 </div> 
                 <div id="generateButton" onClick={generate}>Generate</div> 

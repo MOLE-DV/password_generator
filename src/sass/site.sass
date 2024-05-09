@@ -153,7 +153,16 @@ $site_padding: calc(10vh + 10vw)
             user-select: none
             -webkit-user-drag: none
             cursor: pointer
-            margin-right: $input_padding
             position: absolute
             height: $reset_icon_size
             width: $reset_icon_size
+            transition: .05s
+        #input img:hover
+            scale: 1.1
+        
+        .icon.reset
+            margin-right: calc(.25vh + .25vw)
+
+        .icon.copy
+            margin-right: calc( 2vh + 2vw )
+        
