@@ -1,0 +1,125 @@
+$site_padding: calc(10vh + 10vw)
+    
+#header
+    padding-inline: $site_padding
+    width: 100vw
+    height: calc(3vh + 3vw)
+    display: flex
+
+    $icon_size: calc(1.25vh + 1.25vw)
+
+    #title
+        font-size: calc( 1.25vh + 1.25vw  )
+        display: flex
+        align-items: center
+        .icon
+            height: $icon_size
+            width: $icon_size
+
+#pageContent
+    width: 100vw
+    height: 100vh
+
+
+#generator
+    $generator_height: calc( 25vh + 25vw )
+    $bottom_height: calc( 5vh + 5vw )
+
+    width: 100vw
+    height: $generator_height
+    
+    #bottom
+        width: 100%
+        height: $bottom_height
+        display: flex
+        justify-content: center
+
+        #generateButton
+            display: flex
+            height: calc(2vh + 2vw)
+            align-items: center
+            justify-content: center
+            font-weight: bold
+            font-size: calc(1vh + 1vw)
+            user-select: none
+            min-width: calc(6vh + 6vw)
+            margin-right: calc(.5vh + .5vw)
+            margin-top: calc(.5vh + .5vw)
+            background-color: #90ff86
+            border-radius: calc(.25vh + .25vw)
+            color: black
+            cursor: pointer
+
+        #generateButton:hover
+            filter: drop-shadow(0 0 calc(.05vh + .05vw) black) 
+
+        .checkbox:hover
+            filter: drop-shadow(0 0 calc(.05vh + .05vw) black) 
+
+        .checkbox
+            display: flex
+            height: calc(2vh + 2vw)
+            align-items: center
+            user-select: none
+            min-width: calc(6vh + 6vw)
+            margin-right: calc(.5vh + .5vw)
+            margin-top: calc(.5vh + .5vw)
+            background-color: #e6e6e6
+            border-radius: calc(.25vh + .25vw)
+            
+
+            #title
+                margin-left: calc(.5vh + .5vw)
+                font-weight: bold
+                padding-right: calc(.5vh + .5vw)
+
+            input
+                appearance: none
+                -webkit-appearance: none
+                display: flex
+                align-content: center
+                justify-content: center
+                padding: calc(.5vh + .5vw)
+                border:  solid black
+                border-radius: calc(.25vh + .25vw)
+                background: #ff5454
+                cursor: pointer
+
+            input:checked
+                background: rgb(123, 230, 109)
+                filter: drop-shadow(0 0 calc(.025vh + .025vw) black) 
+
+    #top
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        height: calc( $generator_height - $bottom_height )
+        background: rgb(123, 230, 109)
+
+        $input_padding: calc(1vh + 1vw)            
+        #password
+            height: calc(3.5vh + 3.5vw)
+            width: calc(20vh + 20vw)
+            outline: none
+            border: none
+            filter: drop-shadow(0 0 calc(.025vh + .025vw) black)
+            padding-inline: $input_padding
+            padding-right: calc($input_padding * 2.5)
+            font-size: calc(1.5vh + 1.5vw)
+            border-radius: calc(.25vh + .25vw)
+        
+        #input
+            display: flex
+            justify-content: flex-end
+            align-items: center
+
+        $reset_icon_size: calc(1.25vh + 1.25vw)
+        #input img
+            user-select: none
+            -webkit-user-drag: none
+            cursor: pointer
+            margin-right: $input_padding
+            position: absolute
+            height: $reset_icon_size
+            width: $reset_icon_size
