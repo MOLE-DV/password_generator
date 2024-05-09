@@ -89,6 +89,40 @@ $site_padding: calc(10vh + 10vw)
                 background: rgb(123, 230, 109)
                 filter: drop-shadow(0 0 calc(.025vh + .025vw) black) 
 
+        .slider
+            display: flex
+            height: calc(2vh + 2vw)
+            align-items: center
+            user-select: none
+            min-width: calc(6vh + 6vw)
+            margin-right: calc(.5vh + .5vw)
+            margin-top: calc(.5vh + .5vw)
+            background-color: #e6e6e6
+            border-radius: calc(.25vh + .25vw)
+            padding-inline: calc(.5vh + .5vw)
+
+            #title
+                margin-left: calc(.5vh + .5vw)
+                font-weight: bold
+    
+
+
+            input
+                appearance: none
+                background-color: rgb(123, 230, 109)
+                border-radius: calc(.5vh + .5vw)
+                border:  solid black
+            
+            input::-webkit-slider-thumb 
+                -webkit-appearance: none
+                appearance: none
+                width: calc(1vh + 1vw)
+                height: calc(1vh + 1vw)
+                border-radius: calc(.5vh + .5vw)
+                background: #ff5454
+                cursor: pointer
+            
+
     #top
         display: flex
         justify-content: center
