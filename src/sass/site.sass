@@ -1,3 +1,6 @@
+@import url('./base.sass')
+
+$green: var(--green)
 $site_padding: calc(10vh + 10vw)
     
 #header
@@ -29,34 +32,25 @@ $site_padding: calc(10vh + 10vw)
     height: $generator_height
     
     #bottom
-        width: 100%
-        height: $bottom_height
-        display: flex
-        justify-content: center
+        width: 100vw
+        height: calc(10vh + 10vw)
+        display: block
 
-        #generateButton
-            display: flex
-            height: calc(2vh + 2vw)
-            align-items: center
-            justify-content: center
-            font-weight: bold
-            font-size: calc(1vh + 1vw)
-            user-select: none
-            min-width: calc(6vh + 6vw)
-            margin-right: calc(.5vh + .5vw)
-            margin-top: calc(.5vh + .5vw)
-            background-color: #90ff86
-            border-radius: calc(.25vh + .25vw)
-            color: black
-            cursor: pointer
+        #buttons
+            width: fit-content
+            margin-left: auto
+            margin-right: auto
+            left: 0
+            right: 0
 
-        #generateButton:hover
-            filter: drop-shadow(0 0 calc(.05vh + .05vw) black) 
 
         .checkbox:hover
             filter: drop-shadow(0 0 calc(.05vh + .05vw) black) 
 
-        .checkbox
+
+        .checkbox, .slider, .input, #generateButton
+            position: relative
+            float: left
             display: flex
             height: calc(2vh + 2vw)
             align-items: center
@@ -66,11 +60,26 @@ $site_padding: calc(10vh + 10vw)
             margin-top: calc(.5vh + .5vw)
             background-color: #e6e6e6
             border-radius: calc(.25vh + .25vw)
-            
+            padding-inline: calc(.5vh + .5vw)
+            font-size: calc(.75vh + .75vw)
 
             #title
                 margin-left: calc(.5vh + .5vw)
                 font-weight: bold
+
+        #generateButton
+            display: flex
+            align-items: center
+            justify-content: center
+            font-weight: bold
+            font-size: calc(.7vh + .7vw)
+            background: $green
+
+        #generateButton:hover
+            filter: drop-shadow(0 0 calc(.05vh + .05vw) black) 
+
+        .checkbox
+            #title
                 padding-right: calc(.5vh + .5vw)
 
             input
@@ -86,30 +95,17 @@ $site_padding: calc(10vh + 10vw)
                 cursor: pointer
 
             input:checked
-                background: rgb(123, 230, 109)
+                background: $green
                 filter: drop-shadow(0 0 calc(.025vh + .025vw) black) 
 
         .slider
-            display: flex
-            height: calc(2vh + 2vw)
-            align-items: center
-            user-select: none
-            min-width: calc(6vh + 6vw)
-            margin-right: calc(.5vh + .5vw)
-            margin-top: calc(.5vh + .5vw)
-            background-color: #e6e6e6
-            border-radius: calc(.25vh + .25vw)
-            padding-inline: calc(.5vh + .5vw)
-
             #title
                 margin-left: calc(.5vh + .5vw)
                 font-weight: bold
-    
-
 
             input
                 appearance: none
-                background-color: rgb(123, 230, 109)
+                background-color: $green
                 border-radius: calc(.5vh + .5vw)
                 border:  solid black
             
@@ -121,7 +117,16 @@ $site_padding: calc(10vh + 10vw)
                 border-radius: calc(.5vh + .5vw)
                 background: #ff5454
                 cursor: pointer
-            
+        
+        .input
+            input
+                padding-inline: calc(.5vh + .5vw)
+                height: 50%
+                border: none
+                filter: drop-shadow(0 0 calc(.025vh + .025vw) black)
+                border-radius: calc(.25vh + .25vw)
+                margin-right: calc(.25vh + .25vw)
+
 
     #top
         display: flex
@@ -129,7 +134,7 @@ $site_padding: calc(10vh + 10vw)
         align-items: center
         width: 100%
         height: calc( $generator_height - $bottom_height )
-        background: rgb(123, 230, 109)
+        background: $green
 
         $input_padding: calc(1vh + 1vw)            
         #password

@@ -1,0 +1,38 @@
+@media screen and (max-width: 1000px), screen and (min-height: 2000px)
+    #buttons
+        display: flex
+        flex-direction: column
+        width: 100vw
+        
+    body .checkbox, .slider, .input, #generateButton
+        width: 90vw
+        position: relative
+        float: none
+        display: flex
+        height: calc(5vh + 5vw) !important
+        font-size: calc(1.5vh + 1.5vw)
+
+        input
+            height: calc(2vh + 2vw)
+            width: calc(2vh + 2vw)
+
+        #title
+            margin-left: calc(.5vh + .5vw)
+            font-weight: bold
+    
+
+    .slider, .input
+        padding-top: calc(2vh + 2vw)
+        flex-direction: column
+        input 
+            width: 90%
+            margin-bottom: calc(.5vh + .5vw)
+
+    .slider
+        input::-webkit-slider-thumb
+            scale: 1.5
+    
+    .input
+        input
+            font-size: calc(1vh + 1vw)
+    

@@ -11,7 +11,7 @@ const Generator = () => {
     }
 
     interface settingsDict {
-        [key: string]: boolean | number;
+        [key: string]: boolean | number | string;
     }
 
     interface Symbols {
@@ -25,7 +25,7 @@ const Generator = () => {
         specialchars: '!@#$%^&*()_+=-'
     }
 
-    const [settings, setSettings] = useState<settingsDict>({uppercase: true, lowercase: true, specialchars: true, numbers: true, length: 4});
+    const [settings, setSettings] = useState<settingsDict>({uppercase: true, lowercase: true, specialchars: true, numbers: true, length: 4, customChars: ''});
     const [sliderLen, setsliderLen] = useState(4);
     const [generating, switchGenerating] = useState(false);
 
@@ -49,6 +49,13 @@ const Generator = () => {
         );
     }
 
+    const inputHandler = (event: any) => {
+        setSettings({
+            ...settings,
+            customChars: event.target.value.split(',').join("").replace(/\s/g,'') as string
+        })
+    }
+
     const [ password, setPassword ] = useState("");
 
 
@@ -67,12 +74,22 @@ const Generator = () => {
     const generate = async () => {
         if(generating) return;
         switchGenerating(true);
+
         const filteredKeys: (keyof Symbols)[] = Object.keys(symbols).filter(key => settings[key])
 
-        const usable_symbols:Partial<Symbols> = filteredKeys.reduce((acc, key) => {
+        let usable_symbols:Partial<Symbols> = filteredKeys.reduce((acc, key) => {
             acc[key] = symbols[key];
             return acc;
         }, {} as Partial<Symbols>);
+
+        if(settings.customChars && String(settings.customChars).length > 0){
+            usable_symbols = {
+                ...usable_symbols,
+                customChars: settings.customChars as string
+            }
+        }
+
+        console.log(usable_symbols);
 
         if(Object.keys(usable_symbols).length === 0) {
             switchGenerating(false); 
@@ -124,6 +141,7 @@ const Generator = () => {
                 </div>
             </div>
             <div id="bottom">
+                <div id="buttons">
                 <div className="checkbox">
                     <input type="checkbox" name='uppercase' onChange={checkboxHandler} defaultChecked/>
                     <div id="title">Uppercase</div>
@@ -140,11 +158,16 @@ const Generator = () => {
                     <input type="checkbox" name='numbers' onChange={checkboxHandler} defaultChecked/>
                     <div id="title">Numbers</div>
                 </div> 
+                <div className="input">
+                    <input type="input" name='customChars' onChange={inputHandler}  placeholder='Example: ą, ü, д'/>
+                    <div id="title">Custom characters</div>
+                </div> 
                 <div className="slider">
                     <input type="range" name='length' onChange={sliderHandler} min={1} max={20} defaultValue={4}/>
-                    <div id="title">Length {sliderLen}</div>
+                    <div id="title">Length {sliderLen < 10 ? `0${sliderLen}` : sliderLen}</div>
                 </div> 
                 <div id="generateButton" onClick={generate}>Generate</div> 
+                </div>
             </div>
         </div>
     )
